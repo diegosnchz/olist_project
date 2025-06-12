@@ -49,21 +49,21 @@ El núcleo del proyecto fue la extracción de datos mediante consultas SQL. La c
 
 ```sql
 SELECT
-    o.order_id,
-    o.order_status,
-    o.order_purchase_timestamp,
-    oi.product_id,
-    oi.price,
-    oi.freight_value,
-    c.customer_unique_id,
-    c.customer_city,
-    c.customer_state
+    orders.order_id,
+    orders.order_status,
+    orders.order_purchase_timestamp,
+    order_items.product_id,
+    order_items.price,
+    order_items.freight_value,
+    customers.customer_unique_id,
+    customers.customer_city,
+    customers.customer_state
 FROM
-    orders AS o
+    orders
 LEFT JOIN
-    customers AS c ON o.customer_id = c.customer_id
+    customers ON orders.customer_id = customers.customer_id
 LEFT JOIN
-    order_items AS oi ON o.order_id = oi.order_id
+    order_items ON orders.order_id = order_items.order_id
 ```
 
 ### 3. Análisis y Exportación (Python/Pandas)
